@@ -9,7 +9,7 @@ const errorHandler = require("./middlewares/errorHandler.js");
 const app = express();
 
 const corsOptions = {
-  origin: true,
+  origin: process.env.FRONTEND_URL,
   credentials: true,
 };
 
