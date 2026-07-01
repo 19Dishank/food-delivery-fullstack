@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/header.ejs', {title: "menu" }) %>
+
+  <body>
+    <%- include('../pages/partials/navbar.ejs') %>
+
+
+      <div class="d-flex">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-secondary  text-white "
+          style="width: 250px; height: 100vh;">
+          <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto  text-decoration-none">
+            <span class="fs-4 text-white">Categories</span>
+          </a>
+          <hr>
+          <ul class="nav nav-pills flex-column mb-auto">
+            <% categories.forEach(function(category,index) { %>
+              <li>
+                <a href="#sub<%= index %>" class="nav-link text-white d-flex justify-content-between"
+                  data-bs-toggle="collapse">
+                  <%= category.name %>
+                    <span>▼</span>
+                </a>
+                <ul class="collapse nav flex-column ms-3" id="sub<%= index %>">
+                  <% category.subCategories.forEach(function(sub) { %>
+                    <li>
+                      <a href="/menu/<%= sub._id%>" class="nav-link text-white small">
+                        <%= sub.name %>
+                      </a>
+                    </li>
+                    <% }); %>
+                </ul>
+              </li>
+              <% }); %>
+          </ul>
+        </div>
+
+
+        <!-- <%= specialItems %> -->
+
+        <div class="container">
+
+          <h3 class="text-center m-4">Today's Special</h3>
+
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            <% specialItems.forEach(function (item) { %>
+              <div class="col">
+                <div class="card h-75">
+                  <img src="<%= item.images[0] %>" class="card-img-top h-50 object-fit-cover" alt="<%= item.name %>">
+                  <div class="card-body">
+                    <h5 class="card-title fs-2">
+                      <%= item.name %>
+                        <span>
+                          <% if (item.isVeg==true) { %>
+                            🟩
+                            <% } %>
+                        </span>
+                    </h5>
+                    <p class="card-text fs-2">
+                      Price: Rs. <%= item.price %>
+                    </p>
+                    <a href="#" class="btn btn-danger">Add to cart</a>
+                  </div>
+                </div>
+              </div>
+              <% }); %>
+          </div>
+        </div>
+      </div>
+
+
+
+  </body>
+  <script>
+
+  </script>
+
+</html>
